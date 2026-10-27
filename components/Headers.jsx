@@ -5,7 +5,7 @@ export function Header() {
     <>
       <div className="header-style">
         <img src={chefClaudeLogo} />
-        <h1>ChefMate</h1>
+        <h1>Chef Mate</h1>
       </div>
       <Main />
     </>
