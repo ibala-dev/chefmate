@@ -6,9 +6,12 @@ export function Main() {
           aria-label="Add Ingredient"
           type="text"
           placeholder="e.g. Chicken Biriyani"
-        ></input>
-        <button> Add Ingredient</button>
-      </form>
+        >
+          </input>
+          <button> + Add Ingredient</button>
+          </form>
+        
+      
     </main>
   );
 }
