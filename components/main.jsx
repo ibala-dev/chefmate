@@ -1,16 +1,17 @@
+import React from "react";
 export function Main() {
-  const ingredients = ["chicken", "Tamoto", "Fenugreek"];
-  const ingredientListItems = ingredients.map((ingredient) => (
-    <li key={ingredient}>{ingredient}</li>
-  ));
-
+  const [ingredients,setIngredient] = React.useState([])
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const newIngrediet = formData.get("ingredient");
-    ingredients.push(newIngrediet);
-    console.log(ingredients);
+    const newIngredient = formData.get("ingredient");
+     if (!newIngredient.trim()) return;
+   setIngredient((prev=>[...prev,newIngredient]))
+    event.currentTarget.reset();
   }
+    const ingredientListItems = ingredients.map((ingredient) => (
+    <li key={ingredient}>{ingredient}</li>
+  ));
   return (
     <main>
       <form className="ingridients-form" onSubmit={handleSubmit}>
@@ -18,7 +19,7 @@ export function Main() {
           aria-label="Add Ingredient"
           type="text"
           placeholder="e.g. Chicken"
-          name="ingredient"
+          name="ingredient"                 
         ></input>
         <button type="submit"> + Add Ingredient</button>
       </form>
@@ -27,3 +28,4 @@ export function Main() {
     </main>
   );
 }
+
