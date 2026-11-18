@@ -1,6 +1,9 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
+import recipeCode from "../recipeCode.md?raw";
 export function Main() {
     const [ingredients,setIngredient] = React.useState([])
+    const [recipeShown, setRecipeShown] = React.useState(false);
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -13,7 +16,9 @@ export function Main() {
     const ingredientListItems = ingredients.map((ingredient) => (
     <li key={ingredient}>{ingredient}</li>
   ));
-
+function handleGetRecipe() {
+    setRecipeShown(true);
+  }
   return (
     <main>
       <form className="ingredients-form" onSubmit={handleSubmit}>
@@ -33,9 +38,17 @@ export function Main() {
             <h3> Ready for a recipe?</h3>
             <p>Generate a receipe from your list of ingredients.</p>
           </div>
-           <button>Get a recipe</button>
+           <button onClick={handleGetRecipe}>Get a recipe</button>
           </div>} 
       </section>}
+       {recipeShown && (
+        <section>
+          <ReactMarkdown>{recipeCode}</ReactMarkdown>
+        </section>
+      )}
     </main>
+
   );
+
+  
 }
