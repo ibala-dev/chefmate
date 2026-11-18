@@ -30,7 +30,7 @@ function handleGetRecipe() {
         ></input>
         <button type="submit">  Add Ingredient</button>
       </form>
-      {ingredients.length > 0 && <section>
+      {ingredients.length > 0 && !recipeShown && <section>
         <h2>Ingredients on hand:</h2>
           <ul className="ingredients-list" aria-live="polite">{ingredientListItems}</ul>
          {ingredients.length > 3 && <div className="get-recipe-container">
