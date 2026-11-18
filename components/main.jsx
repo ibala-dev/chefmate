@@ -1,7 +1,6 @@
 import React from "react";
 export function Main() {
-  const [ingredients,setIngredient] = React.useState([])
-
+    const [ingredients,setIngredient] = React.useState([])
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -40,4 +39,3 @@ export function Main() {
     </main>
   );
 }
-
