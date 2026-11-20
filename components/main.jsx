@@ -1,54 +1,44 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
-import recipeCode from "../recipeCode.md?raw";
+import { IngredientsList } from "./IngredientsList";
+import { Recipe } from "./Recipe";
+
 export function Main() {
-    const [ingredients,setIngredient] = React.useState([])
-    const [recipeShown, setRecipeShown] = React.useState(false);
+  const [ingredients, setIngredients] = React.useState([]);
+  const [recipeShown, setRecipeShown] = React.useState(false);
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const newIngredient = formData.get("ingredient");
-     if (!newIngredient.trim()) return;
-   setIngredient((existingIngredients=>[...existingIngredients,newIngredient]))
+    if (!newIngredient.trim()) return;
+    setIngredients((existing) => [...existing, newIngredient]);
     event.currentTarget.reset();
   }
-  
-    const ingredientListItems = ingredients.map((ingredient) => (
-    <li key={ingredient}>{ingredient}</li>
-  ));
-function handleGetRecipe() {
+
+  function handleGetRecipe() {
     setRecipeShown(true);
   }
+
   return (
     <main>
       <form className="ingredients-form" onSubmit={handleSubmit}>
         <input
           aria-label="Add Ingredient"
           type="text"
-          placeholder="e.g. Chicken"  
-          name="ingredient"                 
-        ></input>
-        <button type="submit">  Add Ingredient</button>
+          placeholder="e.g. Chicken"
+          name="ingredient"
+        />
+        <button type="submit">Add Ingredient</button>
       </form>
-      {ingredients.length > 0 && !recipeShown && <section>
-        <h2>Ingredients on hand:</h2>
-          <ul className="ingredients-list" aria-live="polite">{ingredientListItems}</ul>
-         {ingredients.length > 3 && <div className="get-recipe-container">
-            <div>
-            <h3> Ready for a recipe?</h3>
-            <p>Generate a receipe from your list of ingredients.</p>
-          </div>
-           <button onClick={handleGetRecipe}>Get a recipe</button>
-          </div>} 
-      </section>}
-       {recipeShown && (
-        <section>
-          <ReactMarkdown>{recipeCode}</ReactMarkdown>
-        </section>
+
+      {ingredients.length > 0 && !recipeShown && (
+        <IngredientsList
+          ingredients={ingredients}
+          onGetRecipe={handleGetRecipe}
+        />
       )}
+
+      {recipeShown && <Recipe />}
     </main>
-
   );
-
-  
 }
