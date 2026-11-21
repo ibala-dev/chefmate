@@ -8,7 +8,12 @@ export function Main() {
   const [recipes, setRecipes] = React.useState([]); // all AI responses, oldest first
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
-
+  const recipeSection = React.useRef(null)
+React.useEffectEvent(()=>{
+if(recipes!== "" && recipeSection.current!==null){
+  recipeSection.current.scrollIntoView()
+}
+},)
   function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
