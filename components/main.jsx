@@ -11,7 +11,7 @@ export function Main() {
   const recipeSection = React.useRef(null)
 React.useEffectEvent(()=>{
 if(recipes!== "" && recipeSection.current!==null){
-  recipeSection.current.scrollIntoView()
+  recipeSection.current.scrollIntoView({behaviour: "smooth"})
 }
 },)
   function handleSubmit(event) {
